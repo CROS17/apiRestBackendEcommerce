@@ -23,7 +23,7 @@ class CreateItemsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('trademark_id');
             $table->string('avatar01')->nullable();
-            $table->string('avatar01')->nullable();
+            $table->string('avatar02')->nullable();
             $table->string('avatar03')->nullable();
             $table->tinyInteger('condition')->default(1);
             $table->timestamps();

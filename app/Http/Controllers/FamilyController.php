@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FamilyRequest;
 use App\Models\Family;
 use Illuminate\Http\Request;
 
@@ -13,29 +14,42 @@ class FamilyController extends Controller
         return Family::all();
     }
 
-    public function show(Item $fami)
+    public function show(Family $fami)
     {
         return $fami;
     }
 
     public function store(Request $request)
     {
-        $fami = Family::create($request->all());
+        $family = Family::create($request->all());
 
-        return response()->json($fami, 201);
+        return response()->json([
+            'status' => true,
+            'message' => "Family Created successfully!"
+//            'family' => $family
+        ], 201);
     }
 
-    public function update(Request $request, Family $fami)
+    public function update(FamilyRequest $request, Family $family)
     {
-        $fami->update($request->all());
+        $family->update($request->all());
 
-        return response()->json($fami, 200);
+        return response()->json([
+            'status' => true,
+            'message' => "Family Updated successfully!"
+        ], 200);
+
     }
 
-    public function delete(Family $fami)
+    public function delete(Family $family)
     {
-        $fami->delete();
+        $family->update([
+            'condition' => 0
+        ]);
 
-        return response()->json(null, 204);
+        return response()->json([
+            'status' => true,
+            'message' => "Family Deleted successfully!",
+        ], 204);
     }
 }

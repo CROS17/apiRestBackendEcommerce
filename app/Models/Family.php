@@ -15,9 +15,7 @@ class Family extends Model
 
 
     protected $fillable = [
-
         'description',
-
     ];
 
 

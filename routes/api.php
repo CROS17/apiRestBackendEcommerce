@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FamilyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,16 +34,29 @@ Route::group([
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
 
+});
+
+
+Route::group([
+    'middleware' => 'api'
+//    'prefix' => 'auth'
+], function ($router) {
     /**  user family **/
-    Route::get('/families', [FamilyController::class, 'families']);
+    Route::get('/families', [FamilyController::class, 'index']);
     Route::post('/families', [FamilyController::class, 'store']);
-    Route::post('/families/{id}', [FamilyController::class, 'store']);
-    Route::delete('/families/{id}', [FamilyController::class, 'destroy']);
+    Route::put('/families/{family}', [FamilyController::class, 'update']);
+    Route::delete('/families/{family}', [FamilyController::class, 'destroy']);
+
+});
+
+Route::group([
+    'middleware' => 'api'
+//    'prefix' => 'auth'
+], function ($router) {
     /**  user category **/
-
-    /**  user trademark **/
-
-    /**  user item **/
-
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::post('/categories', [CategoryController::class, 'store']);
+    Route::put('/categories/{category}', [CategoryController::class, 'update']);
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
 
 });
